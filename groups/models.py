@@ -6,6 +6,7 @@ from django import template
 import misaka
 
 
+# for 'get_user_groups' in post_list.html
 User = get_user_model()
 register = template.Library()
 
@@ -34,6 +35,7 @@ class Group(models.Model):
 
 class GroupMember(models.Model):
     group = models.ForeignKey(Group, related_name='memberships', on_delete=models.CASCADE)
+    # 'user_groups' for 'get_user_groups' in post_list.html
     user = models.ForeignKey(User, related_name='user_groups', on_delete=models.CASCADE)
 
     def __str__(self):
