@@ -1,3 +1,32 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth import get_user_model
+import misaka
+from groups.models import Group
 
-# Create your models here.
+
+User = get_user_model()
+
+
+class Post(models.Model):
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    text = models.TextField()
+    text_html = models.TextField(editable=False)
+    group = models.ForeignKey(Group, related_name='posts', null=True, blank=True)
+
+    def __str__(self):
+        return self.text
+
+    def save(self, *args, **kwargs):
+        self.text_html = misaka.html(self.text)  # to get markdown
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('abcd', kwargs={'username123': self.user.username,
+                                       'pk123': self.pk})
+
+    class Meta:
+        ordering = ['-created_at']
+        unique_together = ('user', 'text')
+
