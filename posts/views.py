@@ -21,16 +21,16 @@ class UserPostListView(generic.ListView):  # posts of the user
 
     def get_queryset(self):
         try:
-            self.user_posts = User.objects.prefetch_related('posts'). \
+            self.post_user = User.objects.prefetch_related('posts'). \
                 get(username__iexact=self.get('username'))
         except User.DoesNotExist:
             raise Http404
         else:
-            return self.user_posts.posts.all()
+            return self.post_user.posts.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_posts'] = self.user_posts
+        context['post_user'] = self.post_user  # used in user_post_list.html
         return context
 
 
