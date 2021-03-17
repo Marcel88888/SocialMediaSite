@@ -9,7 +9,7 @@
 
   <form method="post">
     {% csrf_token %}
-    <button type="submit" value="Delete" class="btn btn-danger btn-large"></button>
+    <button type="submit" class="btn btn-danger btn-large">Delete</button>
     <a href="{% url 'posts:post_detail' username=user.username pk=object.pk %}"
        class="btn btn-light btn-large">Cancel</a>
   </form>
