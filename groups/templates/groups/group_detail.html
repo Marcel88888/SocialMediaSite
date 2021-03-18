@@ -26,7 +26,10 @@
 
 {% endblock %}
 
-{#to avoid displaying on the entire page#}
+
+{% block group_content %}
+
+  {#to avoid displaying on the entire page#}
   <div class="col-md-8">
     {% if group.posts.count == 0 %}
       <h5>No posts in this group yet.</h5>
@@ -36,9 +39,5 @@
       {% endfor %}
     {% endif %}
   </div>
-
-{% block group_content %}
-
-
 
 {% endblock %}
