@@ -21,8 +21,8 @@ class UserPostListView(generic.ListView):  # posts of the user
 
     def get_queryset(self):
         try:
-            self.post_user = User.objects.prefetch_related('posts'). \
-                get(username__iexact=self.get('username'))
+            self.post_user = User.objects.prefetch_related("posts").get(
+                username__iexact=self.kwargs.get("username"))
         except User.DoesNotExist:
             raise Http404
         else:
@@ -57,7 +57,7 @@ class CreatePostView(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView)
 class DeletePostView(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     model = models.Post
     select_related = ('user', 'group')
-    success_url = reverse_lazy('posts:all123')
+    success_url = reverse_lazy('posts:group_post_list')
 
     def get_queryset(self):
         queryset = super().get_queryset()

@@ -15,6 +15,8 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+DATABASE_DIR = os.path.join(BASE_DIR, 'db.sqlite3')
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
+    'six',
     'accounts.apps.AccountsConfig',
     'groups.apps.GroupsConfig',
     'posts.apps.PostsConfig',
@@ -59,7 +62,7 @@ ROOT_URLCONF = 'socialmediasite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [TEMPLATE_DIR, ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -82,7 +85,7 @@ WSGI_APPLICATION = 'socialmediasite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DATABASE_DIR,
     }
 }
 
@@ -126,5 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-LOGIN_REDIRECT_URL = 'test'
+LOGIN_REDIRECT_URL = 'welcome'
 LOGOUT_REDIRECT_URL = 'thanks'

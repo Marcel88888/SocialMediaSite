@@ -2,30 +2,35 @@
 
 {% block pregroup %}
 
-{#  lowercase 'model' from GroupDetailView class#}
-  <h1>{{ group.name }}</h1>
-  <h2>Members: {{ group.members.count }}</h2>
+  <div class="container">
+  {#  lowercase 'model' from GroupDetailView class#}
+    <h1><strong>{{ group.name }}</strong></h1>
+    <h5>members: {{ group.members.count }}</h5>
 
-  <div class="content">
-    {% if user in group.members.all %}
+    <div class="content">
+      {% if user in group.members.all %}
 
-      <a href="{% url 'groups:leave123' slug=group.slug %}" class="btn btn-lg btn-warning">
-        <span class="fa fa-times-circle-o">Leave</span>
-      </a>
+        <a href="{% url 'groups:leave_group' slug=group.slug %}" class="btn btn-lg btn-warning">
+          <span class="fa fa-times-circle-o">Leave</span>
+        </a>
 
-    {% else %}
+      {% else %}
 
-      <a href="{% url 'groups:join123' slug=group.slug %}" class="btn btn-lg btn-warning">
-        <span class="fa fa-check-circle-o">Join</span>
-      </a>
+        <a href="{% url 'groups:join_group' slug=group.slug %}" class="btn btn-lg btn-warning">
+          <span class="fa fa-check-circle-o">Join</span>
+        </a>
 
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
 
 {% endblock %}
 
-{#to avoid displaying on the entire page#}
-  <div class="col-md-8">
+
+{% block group_content %}
+
+  {#to avoid displaying on the entire page#}
+  <div class="col-md-8 postslist">
     {% if group.posts.count == 0 %}
       <h5>No posts in this group yet.</h5>
     {% else %}
@@ -34,9 +39,5 @@
       {% endfor %}
     {% endif %}
   </div>
-
-{% block group_content %}
-
-
 
 {% endblock %}
