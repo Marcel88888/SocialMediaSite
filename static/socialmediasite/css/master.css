@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+.mycontent {
+    padding-top: 100px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.postslist {
+    padding-top: 100px;
+}
+
+.content {
+    padding-top: 20px;
+}

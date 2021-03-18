@@ -4,8 +4,8 @@
 
   <div class="container">
   {#  lowercase 'model' from GroupDetailView class#}
-    <h1>{{ group.name }}</h1>
-    <h2>Members: {{ group.members.count }}</h2>
+    <h1><strong>{{ group.name }}</strong></h1>
+    <h5>members: {{ group.members.count }}</h5>
 
     <div class="content">
       {% if user in group.members.all %}
@@ -30,7 +30,7 @@
 {% block group_content %}
 
   {#to avoid displaying on the entire page#}
-  <div class="col-md-8">
+  <div class="col-md-8 postslist">
     {% if group.posts.count == 0 %}
       <h5>No posts in this group yet.</h5>
     {% else %}
